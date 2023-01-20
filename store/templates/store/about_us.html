@@ -1,0 +1,39 @@
+{% extends 'store/navbar.html' %}
+
+{% block title %} {{ config.name }} {% endblock %}
+
+{% block logo %}{{ config.logo.url }}{% endblock %}
+
+{% block navbar_title%} {{ config.name }} {% endblock %}
+
+{% block body %}
+
+<br/><br/><br/>
+
+<div style="text-align: center;">
+    <h1>{{ config.name }}</h1>
+    <br/><br/>
+
+    <figure>
+        <img src="{{ config.logo.url }}" alt="Logo">
+    </figure>
+    <br/><br/>
+
+    <h3>{% if request.LANGUAGE_CODE == 'ca' %}Sobre nosaltres{% else %}Sobre nosotros{% endif %}</h3>
+    <p>{{ config.about_us | safe }}</p>  
+    <br/><br/>
+    
+    <h3>{% if request.LANGUAGE_CODE == 'ca' %}La nostra adreça{% else %}La nostra direcció{% endif %}</h3>
+    <p>{{ config.address | safe }}</p>
+    <br/><br/>
+
+    <h3>{% if request.LANGUAGE_CODE == 'ca' %}Contacte amb nosaltres{% else %}Contacta con nosotros{% endif %}</h3>
+    <p>
+        <b>Tel.</b> {{ config.phone }}<br/>
+        <b>eMail.</b> <a href = "mailto: {{ config.email }}">{{ config.email }}</a> 
+    </p>
+    <br/><br/>
+
+</div>
+
+{% endblock %}

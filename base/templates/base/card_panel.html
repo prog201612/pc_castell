@@ -1,0 +1,19 @@
+<div> <!-- class="alert alert-light" role="alert" -->
+  <h3>{{ objects.name }}</h3>
+  <br />
+
+  <div style="display:flex; justify-content:space-around;">
+    {% for panelcategories in objects.categories %}
+    <div class="card" style="width: 18rem; margin: 3px;">
+      {% if panelcategories.link %}<a href="{{ panelcategories.link}}">{% endif %}
+        <img src="{{ panelcategories.image.url }}" class="card-img-top" alt="...">
+      {% if panelcategories.link %}</a>{% endif %}
+      <div class="card-body">
+        <h5 class="card-title">
+          {{ panelcategories.name }}
+        </h5>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>

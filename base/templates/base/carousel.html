@@ -1,0 +1,56 @@
+
+<!-- Definim la variable panel_id -->
+{% with panel_id=objects.name|cut:" "|lower %}
+
+  <div 
+    id="{{ panel_id }}" 
+    class="carousel slide" 
+    {% if objects.autoplay %}
+      data-bs-ride="carousel"
+    {% endif %}
+  >
+    <div class="carousel-indicators">
+
+      <!-- I n d i c a t o r   b u t t o n s -->
+      {% for panelcarousel in objects.carousel %}
+        {% with counter=forloop.counter0 %}
+          <button 
+            type="button" 
+            data-bs-target="#{{ panel_id }}" 
+            data-bs-slide-to="{{counter}}" 
+            aria-label="{{ panelcarousel.title }}"
+            {% if counter == 0%} class="active" aria-current="true" {% endif %}
+          ></button>
+        {% endwith %}
+      {% endfor %}
+    </div>
+
+    <!-- C o n t e n t -->
+    <div class="carousel-inner">
+      {% for panelcarousel in objects.carousel %}
+        {% with counter=forloop.counter0 %}
+          <div class="carousel-item {% if counter == 0%} active {% endif %}">
+            <img src="{{ panelcarousel.image.url }}" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>{% if panelcarousel.title is not None %}{{ panelcarousel.title }}{% endif %}</h5>
+              <p>{% if panelcarousel.description is not None %}{{ panelcarousel.description }}{% endif %}</p>
+            </div>
+          </div>
+        {% endwith %}
+      {% endfor %}
+
+    </div>
+
+    <!-- C o n t r o l   b u t t o n s -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#{{ panel_id }}" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#{{ panel_id }}" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+
+  </div>
+
+{% endwith %}

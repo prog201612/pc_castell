@@ -1,0 +1,31 @@
+<div> <!-- class="alert alert-light" role="alert" -->
+  <h3>{{ objects.name }}</h3>
+  <br />
+
+  <div style="display:flex; justify-content:space-around;">
+    {% for panelproducts in objects.products %}
+    <div class="card" style="width: 18rem; margin: 3px;">
+      <img src="{{ panelproducts.image.url }}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">
+          {{ panelproducts.name }}
+        </h5>
+        <p>{{ panelproducts.description }}</p>
+        {% if panelproducts.discount_percentage == 0 %}
+          <h6 style="font-size: 1.3em; font-weight: bold;">{{ panelproducts.pvp }} €</h6>
+        {% else %}
+          <h6 style="font-size: 1.3em; font-weight: bold; color: brown">
+            {{ panelproducts.new_price }} €
+            <span style="font-size: 0.7em; font-weight: lighter; color: #666">
+              PVPR: 
+              <span style="text-decoration:line-through;">
+                {{ panelproducts.pvp }} €
+              </span>
+            </span>
+          </h6>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>

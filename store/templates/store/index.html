@@ -1,0 +1,26 @@
+{% extends 'store/navbar.html' %}
+
+{% block title %} {{ config.name }} {% endblock %}
+
+{% block logo %}{{ config.logo.url }}{% endblock %}
+
+{% block navbar_title%} {{ config.name }} {% endblock %}
+
+{% block navbar %} 
+  {{ block.super }} 
+{% endblock %}
+
+
+{% block body %}
+  {% for panel in panels %}
+    <br/><br/>
+    {% if panel.type == 1 %} {# CAROUSEL_CHOICE #}
+      {% include "base/carousel.html" with objects=panel %}
+    {% elif panel.type == 2 %} {# PRODUCT_CATEGORY_CHOICE #}
+      {% include "base/card_panel.html" with objects=panel %}
+    {% elif panel.type == 3 %} {# PRODUCT_CHOICE #}
+      {% include "base/product_panel.html" with objects=panel %}
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+
