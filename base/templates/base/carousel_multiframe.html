@@ -1,0 +1,101 @@
+
+<style>
+  .mcarousel-multiframe-button {
+    position: absolute;
+    top: 50%;
+    margin-top: -25px;
+    font-size: 30px;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    z-index: 10;
+    box-shadow: 5px 5px 5px #333;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .mcarousel-multiframe-button-right {
+    right: 50px;
+  }
+  .mcarousel-multiframe-button-left {
+    left: 50px;
+  }
+</style>
+
+
+<div id="cmf-main-div"> <!-- class="alert alert-light" role="alert" -->
+  <h3>{{ objects.name }}</h3>
+  <br />
+
+  <div id="cmf-container" style="overflow:hidden; position:relative;">
+
+    <div id="cmf-btn-right" class="mcarousel-multiframe-button mcarousel-multiframe-button-right" onclick="btnRightClick()">&gt;</div>
+    <div id="cmf-btn-left" class="mcarousel-multiframe-button mcarousel-multiframe-button-left" onclick="btnLeftClick()">&lt;</div>
+
+    <div id="cmf-panel-move" style="display:flex; justify-content:space-around; width:{{objects.products_panel_width}}px;">
+      {% for panelproducts in objects.products %}
+      <div class="card" style="width: 300px; margin: 3px;">
+        <img src="{{ panelproducts.image.url }}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">
+            {{ panelproducts.name }}
+          </h5>
+          <p>{{ panelproducts.description }}</p>
+          {% if panelproducts.discount_percentage == 0 %}
+          <h6 style="font-size: 1.3em; font-weight: bold;">{{ panelproducts.pvp }} €</h6>
+          {% else %}
+          <h6 style="font-size: 1.3em; font-weight: bold; color: brown">
+            {{ panelproducts.new_price }} €
+            <span style="font-size: 0.7em; font-weight: lighter; color: #666">
+              PVPR:
+              <span style="text-decoration:line-through;">
+                {{ panelproducts.pvp }} €
+              </span>
+            </span>
+          </h6>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</div>
+
+
+<script>
+  function btnRightClick() {
+    // container
+    var container = document.getElementById("cmf-container")
+    var containerWidth = container.offsetWidth
+    // Panel Move
+    var panel = document.getElementById("cmf-panel-move")
+    var panelWidth = panel.offsetWidth
+    var marginLeftInt = parseInt( panel.style.marginLeft.replace("px","") || 0) - 300
+    // marginLeftInt sempre és 0 o negatiu, per desplaçar el panell cap a l'esquerra.
+    if (panelWidth + marginLeftInt < containerWidth) {
+      // Si és l'últim item a la dreta volem que quedi ben alineat a la dreta amb els altres panells
+      marginLeftInt += containerWidth - (panelWidth + marginLeftInt)
+    }
+    panel.style.marginLeft = `${marginLeftInt}px`
+  }
+
+  function btnLeftClick() {
+    // container
+    var container = document.getElementById("cmf-container")
+    var containerWidth = container.offsetWidth
+    // Panel Move
+    var panel = document.getElementById("cmf-panel-move")
+    var panelWidth = panel.offsetWidth
+    var marginLeftInt = parseInt( panel.style.marginLeft.replace("px","") || 0) + 300
+    // marginLeftInt sempre és 0 o negatiu, per desplaçar el panell cap a l'esquerra.
+    if (panelWidth + marginLeftInt >= 0) {
+      // Si és l'últim item a la dreta volem que quedi ben alineat a la dreta amb els altres panells
+      marginLeftInt = 0
+    }
+    panel.style.marginLeft = `${marginLeftInt}px`
+  }
+
+</script>

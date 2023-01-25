@@ -18,6 +18,7 @@ build/
 tests/report/
 
 # PCR
+.DS_Store
 media/
 pc_castell/settings.py
 db.sqlite3

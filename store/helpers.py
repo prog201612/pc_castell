@@ -80,7 +80,7 @@ def translate_panels(language):
                 "new_price": product_row.product.pvp - (product_row.product.pvp * product_row.product.discount_percentage / 100)
             }
             panel_dic["products"].append(product)
-
+        panel_dic["products_panel_width"] = len(panel_dic["products"]) * 300
         panels.append(panel_dic)
 
     return panels
