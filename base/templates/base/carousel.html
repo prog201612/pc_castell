@@ -30,7 +30,7 @@
       {% for panelcarousel in objects.carousel %}
         {% with counter=forloop.counter0 %}
           <div class="carousel-item {% if counter == 0%} active {% endif %}">
-            <img src="{{ panelcarousel.image.url }}" class="d-block w-100" alt="...">
+            <img id="carousel-image-{{forloop.counter0}}-{{ panel_id }}" src="{{ panelcarousel.image.url }}" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
               <h5>{% if panelcarousel.title is not None %}{{ panelcarousel.title }}{% endif %}</h5>
               <p>{% if panelcarousel.description is not None %}{{ panelcarousel.description }}{% endif %}</p>
@@ -52,5 +52,37 @@
     </button>
 
   </div>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (!CAROUSEL_EVENT_RESIZE_CREATED) {
+        console.log("CAROUSEL_EVENT_RESIZE_CREATED")
+        onResizeSetImage()
+        window.addEventListener('resize', () => {
+          CAROUSEL_EVENT_RESIZE_CREATED = true
+          onResizeSetImage()
+        })
+      }
+    })
+
+    const onResizeSetImage = () => {
+      /*
+      Ho pot haver varis panells d'aquest tipus, i cada panell pot tenir vàries imatges,
+      cada imatge pot tenir una imatge en cas de dispositiu mòbil. És per això que ens
+      cal identificar cada imatge amb un número i l'identificador del panell i segons
+      el tamany de la finestra assignar una imatge o una altre.
+       */
+      {% for panelcarousel in objects.carousel %}
+        const image{{forloop.counter0}} = document.getElementById("carousel-image-{{forloop.counter0}}-{{ panel_id }}")
+        console.log("onResizeSetImage", "{{ panelcarousel.image_mobile.url }}", image{{forloop.counter0}}, window.innerWidth  )
+        if (window.innerWidth < 800 && "{{ panelcarousel.image_mobile.url }}" !== "") {
+          image{{forloop.counter0}}.src = "{{ panelcarousel.image_mobile.url }}"
+        } else {
+          image{{forloop.counter0}}.src = "{{ panelcarousel.image.url }}"
+        }
+      {% endfor %}
+    }
+  </script>
 
 {% endwith %}

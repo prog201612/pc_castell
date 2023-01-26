@@ -97,6 +97,7 @@ class PanelCarousel(models.Model):
     title = models.CharField("Títol", max_length=50, blank=True, null=True)
     description = models.CharField("Descripció", max_length=250, blank=True, null=True)
     image = models.ImageField("Imatge", upload_to='carousel/', blank=True, null=True)
+    image_mobile = models.ImageField("Imatge per mòbil", upload_to='carousel/', blank=True, null=True)
 
 class PanelCategories(models.Model):
     panel = models.ForeignKey(Panel, on_delete=models.CASCADE)
