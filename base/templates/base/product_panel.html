@@ -1,10 +1,29 @@
+<style>
+  .product-panel-div {
+    display:flex; 
+    justify-content:space-around;
+  }
+  .card-product {
+    width: 18rem; margin: 3px;
+  }
+
+  @media only screen and (max-width: 800px) {
+    .product-panel-div {
+      flex-wrap: wrap;
+    }
+    .card-product  {
+      width: 48%;
+    }
+  }
+</style>
+
 <div> <!-- class="alert alert-light" role="alert" -->
   <h3>{{ objects.name }}</h3>
   <br />
 
-  <div style="display:flex; justify-content:space-around;">
+  <div class="product-panel-div">
     {% for panelproducts in objects.products %}
-    <div class="card" style="width: 18rem; margin: 3px;">
+    <div class="card card-product">
       <img src="{{ panelproducts.image.url }}" class="card-img-top" alt="...">
       <div class="card-body">
         <h5 class="card-title">

@@ -22,6 +22,11 @@
   .mcarousel-multiframe-button-left {
     left: 50px;
   }
+  .panel-move {
+    display:flex; 
+    justify-content:space-around; 
+    transition: margin-left 1s;
+  }
 </style>
 
 
@@ -34,7 +39,7 @@
     <div id="cmf-btn-right" class="mcarousel-multiframe-button mcarousel-multiframe-button-right" onclick="btnRightClick()">&gt;</div>
     <div id="cmf-btn-left" class="mcarousel-multiframe-button mcarousel-multiframe-button-left" onclick="btnLeftClick()">&lt;</div>
 
-    <div id="cmf-panel-move" style="display:flex; justify-content:space-around; width:{{objects.products_panel_width}}px;">
+    <div id="cmf-panel-move" class="panel-move" style="width:{{objects.products_panel_width}}px;">
       {% for panelproducts in objects.products %}
       <div class="card" style="width: 300px; margin: 3px;">
         <img src="{{ panelproducts.image.url }}" class="card-img-top" alt="...">
@@ -91,7 +96,7 @@
     var panelWidth = panel.offsetWidth
     var marginLeftInt = parseInt( panel.style.marginLeft.replace("px","") || 0) + 300
     // marginLeftInt sempre és 0 o negatiu, per desplaçar el panell cap a l'esquerra.
-    if (panelWidth + marginLeftInt >= 0) {
+    if (marginLeftInt >= 0) {
       // Si és l'últim item a la dreta volem que quedi ben alineat a la dreta amb els altres panells
       marginLeftInt = 0
     }

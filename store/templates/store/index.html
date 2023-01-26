@@ -20,9 +20,9 @@
       {% include "base/card_panel.html" with objects=panel %}
     {% elif panel.type == 3 %} {# PRODUCT_CHOICE #}
       {% include "base/product_panel.html" with objects=panel %}
+    {% elif panel.type == 4 %} {# CAROUSEL_MULTIFRAME #}
+      {% include "base/carousel_multiframe.html" with objects=panel %}
     {% endif %}
   {% endfor %}
-
-  {% include "base/carousel_multiframe.html" with objects=panels.2 %}
 {% endblock %}
 

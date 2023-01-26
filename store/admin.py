@@ -39,6 +39,8 @@ class PanelProductsInline(admin.TabularInline):
 
 @admin.register(models.Panel)
 class PanelAdmin(admin.ModelAdmin):
+    # https://docs.djangoproject.com/en/dev/ref/models/instances/#django.db.models.Model.get_FOO_display
+    list_display = ["name", "order", "get_type_display"]
     inlines = [
         PanelCarouselInline,
         PanelCategoriesInline,
