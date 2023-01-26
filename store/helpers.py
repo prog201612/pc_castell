@@ -28,7 +28,6 @@ def translate_products_by_category(language, category_id):
             "pvp": product_row.pvp,
             "discount_percentage": product_row.discount_percentage,
             "image": product_row.image,
-            "image_mobile": product_row.image_mobile,
             "new_price": product_row.pvp - (product_row.pvp * product_row.discount_percentage / 100)
         }
         category_dic["products"].append(product)
