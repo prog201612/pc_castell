@@ -56,19 +56,19 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      if (!CAROUSEL_EVENT_RESIZE_CREATED) {
+      if (!CAROUSEL_EVENT_RESIZE_CREATED.includes("{{ panel_id }}")) {
         console.log("CAROUSEL_EVENT_RESIZE_CREATED")
-        onResizeSetImage()
+        {{ panel_id }}OnResizeSetImage()
         window.addEventListener('resize', () => {
-          CAROUSEL_EVENT_RESIZE_CREATED = true
-          onResizeSetImage()
+          CAROUSEL_EVENT_RESIZE_CREATED.push("{{ panel_id }}")
+          {{ panel_id }}OnResizeSetImage()
         })
       }
     })
 
-    const onResizeSetImage = () => {
+    const {{ panel_id }}OnResizeSetImage = () => {
       /*
-      Ho pot haver varis panells d'aquest tipus, i cada panell pot tenir vàries imatges,
+      Hi pot haver varis panells d'aquest tipus, i cada panell pot tenir vàries imatges,
       cada imatge pot tenir una imatge en cas de dispositiu mòbil. És per això que ens
       cal identificar cada imatge amb un número i l'identificador del panell i segons
       el tamany de la finestra assignar una imatge o una altre.
