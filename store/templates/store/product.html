@@ -1,0 +1,45 @@
+{% extends 'store/navbar.html' %}
+
+{% block title %} {{ config.name }} {% endblock %}
+
+{% block style %} 
+{{ block.super }}
+{% endblock %}
+
+{% block logo %}{{ config.logo.url }}{% endblock %}
+
+{% block navbar_title%} {{ config.name }} {% endblock %}
+
+{% block body %}
+<br/><br/>
+<h3>{{ product.name }}</h3>
+<br />
+
+<div class="card mb-3" style="min-height: 100%; position: relative;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-text">{{ product.description }}</p>
+        <small class="text-body-secondary">Categoria:</small> 
+        <p class="card-text">{{ product.categoria }}</p>
+        <br />
+        <small class="text-body-secondary">PVP:</small> 
+        <h6 style="font-size: 1.3em; font-weight: bold; color: brown">
+          {{ product.new_price }} €
+        </h6>
+        <span style="font-size: 0.7em; font-weight: lighter; color: #666">
+          PVPR:
+          <span style="text-decoration:line-through;">
+            {{ product.pvp }} €
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock body %}

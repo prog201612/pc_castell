@@ -24,7 +24,7 @@ class Config(models.Model):
 
 
 class Translate(models.Model):
-    ca = models.CharField("Catalè", max_length=250)
+    ca = models.CharField("Català", max_length=250)
     es = models.CharField("Castellano", max_length=250)
 
     def __str__(self) -> str:

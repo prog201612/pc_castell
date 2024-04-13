@@ -11,36 +11,40 @@
 <br/><br/>
 
 <div> <!-- class="alert alert-light" role="alert" -->
-    <h3>{{ category.name }}</h3>
-    <br />
-  
-    <div style="display:flex; flex-wrap: wrap;">
-      {% for product in category.products %}
-      <div class="card" style="width: 18rem; margin: 3px;">
-        <img src="{{ product.image.url }}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">
-            {{ product.name }}
-          </h5>
-          <p>{{ product.description }}</p>
-          {% if product.discount_percentage == 0 %}
-            <h6 style="font-size: 1.3em; font-weight: bold;">{{ product.pvp }} €</h6>
-          {% else %}
-            <h6 style="font-size: 1.3em; font-weight: bold; color: brown">
-              {{ product.new_price }} €
-              <span style="font-size: 0.7em; font-weight: lighter; color: #666">
-                PVPR: 
-                <span style="text-decoration:line-through;">
-                  {{ product.pvp }} €
-                </span>
+  <h3>{{ category.name }}</h3>
+  <br />
+
+  <div style="display:flex; flex-wrap: wrap;">
+    {% for product in category.products %}
+    <div class="card" style="width: 18rem; margin: 3px;">
+      {% if product.id %}
+        <a href="{% url 'store:product' product.id %}">
+          <img src="{{ product.image.url }}" class="card-img-top" alt="...">
+        </a>
+      {% endif %}
+      <div class="card-body">
+        <h5 class="card-title">
+          {{ product.name }}
+        </h5>
+        <p>{{ product.description }}</p>
+        {% if product.discount_percentage == 0 %}
+          <h6 style="font-size: 1.3em; font-weight: bold;">{{ product.pvp }} €</h6>
+        {% else %}
+          <h6 class="price">
+            {{ product.new_price }} €
+            <span style="font-size: 0.7em; font-weight: lighter; color: #666">
+              PVPR: 
+              <span style="text-decoration:line-through;">
+                {{ product.pvp }} €
               </span>
-            </h6>
-          {% endif %}
-        </div>
+            </span>
+          </h6>
+        {% endif %}
       </div>
-      {% endfor %}
     </div>
+    {% endfor %}
   </div>
+</div>
 
 
 {% endblock %}

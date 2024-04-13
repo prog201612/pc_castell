@@ -11,10 +11,13 @@
     height: 50px;
     text-align: center;
     z-index: 10;
-    box-shadow: 5px 5px 5px #333;
+    box-shadow: 1px 1px 10px #333;
     color: white;
     font-weight: bold;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .mcarousel-multiframe-button-right {
     right: 30px;
@@ -36,13 +39,15 @@
 
   <div id="cmf-container" style="overflow:hidden; position:relative;">
 
-    <div id="cmf-btn-right" class="mcarousel-multiframe-button mcarousel-multiframe-button-right" onclick="btnRightClick()">&gt;</div>
-    <div id="cmf-btn-left" class="mcarousel-multiframe-button mcarousel-multiframe-button-left" onclick="btnLeftClick()">&lt;</div>
+    <div id="cmf-btn-right" class="mcarousel-multiframe-button mcarousel-multiframe-button-right" onclick="btnRightClick()"><i class="fa-solid fa-angle-right"></i></div>
+    <div id="cmf-btn-left" class="mcarousel-multiframe-button mcarousel-multiframe-button-left" onclick="btnLeftClick()"><i class="fa-solid fa-angle-left"></i></div>
 
     <div id="cmf-panel-move" class="panel-move" style="width:{{objects.products_panel_width}}px;">
       {% for panelproducts in objects.products %}
       <div class="card" style="width: 300px; margin: 3px;">
-        <img src="{{ panelproducts.image.url }}" class="card-img-top" alt="...">
+        <a href="{% url 'store:product' panelproducts.id %}">
+          <img src="{{ panelproducts.image.url }}" class="card-img-top" alt="...">
+        </a>
         <div class="card-body">
           <h5 class="card-title">
             {{ panelproducts.name }}

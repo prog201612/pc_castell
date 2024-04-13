@@ -24,7 +24,9 @@
   <div class="product-panel-div">
     {% for panelproducts in objects.products %}
     <div class="card card-product">
-      <img src="{{ panelproducts.image.url }}" class="card-img-top" alt="...">
+      <a href="{% url 'store:product' panelproducts.id %}">
+        <img src="{{ panelproducts.image.url }}" class="card-img-top" alt="...">
+      </a>
       <div class="card-body">
         <h5 class="card-title">
           {{ panelproducts.name }}

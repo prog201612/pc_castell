@@ -14,7 +14,38 @@
   <!-- Fontawesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  {% block style %} {% endblock %}
+  <!-- Amb aquest estil el footer sempre es queda a la part inferior encara que el contingut no empenyi suficientment -->
+  <style>
+    html, body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      /*background-color: purple;*/
+    }
+    .relative100 {
+      position: relative;
+      flex: 1 0 auto;
+      /*background-color: orange;*/
+    }
+    .footer {
+      position: relative;
+      width: 100%;
+      height: 165px;
+      background-color: #333;
+      color: #eee;
+      margin-top: 40px;
+      flex-shrink: 0;
+    }
+    .price {
+      font-size: 1.3em; 
+      font-weight: bold; 
+      color: brown
+    }
+  </style>    
+
+  {% block style %}{% endblock %}
 </head>
 </head>
 
@@ -25,12 +56,12 @@
   <!-- END Navbar -->
 
   <!-- body -->
-  <div id="body-div" class="container">
+  <div id="body-div" class="container relative100">
     {% block body %} {% endblock %}
   </div>
 
   <!-- Foot -->
-  <div class="container-fluid" style="background-color: #333; color: #eee; margin-bottom: -20px; margin-top: 40px;">
+  <div class="footer">
     {% block foot %} {% endblock %}
   </div>
 

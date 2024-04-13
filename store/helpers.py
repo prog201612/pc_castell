@@ -10,6 +10,19 @@ def translate_text(language, text):
         return text
     return translated_text[0].es
 
+def translate_product(language, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    product_dic = {
+        "id": product.id,
+        "name": translate_text(language, product.name),
+        "categoria": product.categoria,
+        "description": translate_text(language, product.description),
+        "pvp": product.pvp,
+        "discount_percentage": product.discount_percentage,
+        "image": product.image,
+        "new_price": product.pvp - (product.pvp * product.discount_percentage / 100)
+    }
+    return product_dic
 
 def translate_products_by_category(language, category_id):
     category = get_object_or_404(ProductCategory, pk=category_id)
@@ -21,19 +34,10 @@ def translate_products_by_category(language, category_id):
     category_dic["products"] = []
     products = Product.objects.filter(categoria=category)
     for product_row in products:
-        product = {
-            "name": translate_text(language, product_row.name),
-            "categoria": product_row.categoria,
-            "description": translate_text(language, product_row.description),
-            "pvp": product_row.pvp,
-            "discount_percentage": product_row.discount_percentage,
-            "image": product_row.image,
-            "new_price": product_row.pvp - (product_row.pvp * product_row.discount_percentage / 100)
-        }
+        product = translate_product(language, product_row.id)
         category_dic["products"].append(product)
         
     return category_dic
-
 
 def translate_panels(language):
     panels = []
@@ -71,15 +75,7 @@ def translate_panels(language):
         # P r o d u c t e s   d e l   p a n e l l
         panel_dic["products"] = []
         for product_row in panel.panelproducts_set.all():
-            product = {
-                "name": translate_text(language, product_row.product.name),
-                "categoria": product_row.product.categoria,
-                "description": translate_text(language, product_row.product.description),
-                "pvp": product_row.product.pvp,
-                "discount_percentage": product_row.product.discount_percentage,
-                "image": product_row.product.image,
-                "new_price": product_row.product.pvp - (product_row.product.pvp * product_row.product.discount_percentage / 100)
-            }
+            product = translate_product(language, product_row.product.id)
             panel_dic["products"].append(product)
         panel_dic["products_panel_width"] = len(panel_dic["products"]) * 300
         panels.append(panel_dic)
