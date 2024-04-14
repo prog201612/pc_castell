@@ -1,22 +1,4 @@
-<style>
-  .product-panel-div {
-    display:flex; 
-    justify-content:space-around;
-  }
-  .card-product {
-    width: 18rem; margin: 3px;
-  }
-
-  @media only screen and (max-width: 800px) {
-    .product-panel-div {
-      flex-wrap: wrap;
-    }
-    .card-product  {
-      width: 48%;
-    }
-  }
-</style>
-
+<!-- Product Card -->
 <div> <!-- class="alert alert-light" role="alert" -->
   <h3>{{ objects.name }}</h3>
   <br />
@@ -24,9 +6,13 @@
   <div class="product-panel-div">
     {% for panelproducts in objects.products %}
     <div class="card card-product">
+
+      <!-- Imatge del producte -->
       <a href="{% url 'store:product' panelproducts.id %}">
         <img src="{{ panelproducts.image.url }}" class="card-img-top" alt="...">
       </a>
+
+      <!-- Informació del producte -->
       <div class="card-body">
         <h5 class="card-title">
           {{ panelproducts.name }}

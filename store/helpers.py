@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 
-from store.models import Panel, Translate, ProductCategory, Product
+from store.models import Panel, Translate, ProductCategory, Product, Config
 
 def translate_text(language, text):
     if language == 'ca':
@@ -24,6 +24,7 @@ def translate_product(language, product_id):
     }
     return product_dic
 
+
 def translate_products_by_category(language, category_id):
     category = get_object_or_404(ProductCategory, pk=category_id)
     category_dic = {
@@ -38,6 +39,7 @@ def translate_products_by_category(language, category_id):
         category_dic["products"].append(product)
         
     return category_dic
+
 
 def translate_panels(language):
     panels = []
@@ -81,3 +83,21 @@ def translate_panels(language):
         panels.append(panel_dic)
 
     return panels
+
+
+def translate_config(language):
+    config = None
+    if Config.objects.count() > 0:
+        config = Config.objects.all()[0]
+    return {
+        "name": "" if config is None else config.name,
+        "address": "" if config is None else config.address,
+        "about_us_title": translate_text(language, "Sobre nosaltres"),
+        "about_us": "" if config is None else translate_text(language, config.about_us),
+        "address_title": translate_text(language, "La nostra adreça"),
+        "contact_title": translate_text(language, "Contacte amb nosaltres"),
+        "logo_url": "" if config is None else config.logo.url,
+        "phone": "" if config is None else config.phone,
+        "email": "" if config is None else config.email
+    }
+    

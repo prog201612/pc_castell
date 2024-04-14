@@ -43,6 +43,25 @@
       font-weight: bold; 
       color: brown
     }
+
+    /* Product Card */
+    
+    .product-panel-div {
+      display:flex; 
+      justify-content:space-around;
+    }
+    .card-product {
+      width: 18rem; margin: 3px;
+    }
+  
+    @media only screen and (max-width: 800px) {
+      .product-panel-div {
+        flex-wrap: wrap;
+      }
+      .card-product  {
+        width: 48%;
+      }
+    }  
   </style>    
 
   {% block style %}{% endblock %}

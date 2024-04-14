@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic.base import TemplateView
 
 from store.models import Config, Panel
-from store.helpers import translate_panels, translate_product, translate_products_by_category
+from store.helpers import translate_config, translate_panels, translate_product, translate_products_by_category
 
 # I n d e x
 
@@ -43,8 +43,7 @@ class AboutUs(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if Config.objects.count() > 0:
-            context['config'] = Config.objects.all()[0]
+        context['config'] = translate_config(self.request.LANGUAGE_CODE)
         return context
 
 
