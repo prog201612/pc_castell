@@ -17,7 +17,7 @@
   <div style="display:flex; flex-wrap: wrap;">
     {% for product in category.products %}
     <div class="card" style="width: 18rem; margin: 3px;">
-      {% if product.id %}
+      {% if product.id and product.image %}
         <a href="{% url 'store:product' product.id %}">
           <img src="{{ product.image.url }}" class="card-img-top" alt="...">
         </a>

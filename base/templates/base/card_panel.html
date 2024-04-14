@@ -25,7 +25,9 @@
     {% for panelcategories in objects.categories %}
     <div class="card card-panel">
       {% if panelcategories.link %}<a href="{{ panelcategories.link}}">{% endif %}
-        <img src="{{ panelcategories.image.url }}" class="card-img-top" alt="...">
+        {% if panelcategories.image %}
+          <img src="{{ panelcategories.image.url }}" class="card-img-top" alt="...">
+        {% endif %}
       {% if panelcategories.link %}</a>{% endif %}
       <div class="card-body">
         <h5 class="card-title">

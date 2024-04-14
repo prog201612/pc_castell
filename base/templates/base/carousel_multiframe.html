@@ -45,9 +45,13 @@
     <div id="cmf-panel-move" class="panel-move" style="width:{{objects.products_panel_width}}px;">
       {% for panelproducts in objects.products %}
       <div class="card" style="width: 300px; margin: 3px;">
-        <a href="{% url 'store:product' panelproducts.id %}">
-          <img src="{{ panelproducts.image.url }}" class="card-img-top" alt="...">
-        </a>
+
+        {% if panelproducts.image %}
+          <a href="{% url 'store:product' panelproducts.id %}">
+            <img src="{{ panelproducts.image.url }}" class="card-img-top" alt="...">
+          </a>
+        {% endif %}
+        
         <div class="card-body">
           <h5 class="card-title">
             {{ panelproducts.name }}

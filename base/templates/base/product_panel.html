@@ -8,9 +8,11 @@
     <div class="card card-product">
 
       <!-- Imatge del producte -->
-      <a href="{% url 'store:product' panelproducts.id %}">
-        <img src="{{ panelproducts.image.url }}" class="card-img-top" alt="...">
-      </a>
+      {% if panelproducts.image %}
+        <a href="{% url 'store:product' panelproducts.id %}">
+          <img src="{{ panelproducts.image.url }}" class="card-img-top" alt="...">
+        </a>
+      {% endif %}
 
       <!-- Informació del producte -->
       <div class="card-body">

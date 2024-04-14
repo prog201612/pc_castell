@@ -31,7 +31,9 @@
       {% for panelcarousel in objects.carousel %}
         {% with counter=forloop.counter0 %}
           <div class="carousel-item {% if counter == 0%} active {% endif %}">
-            <img id="carousel-image-{{forloop.counter0}}-{{ panel_id }}" src="{{ panelcarousel.image.url }}" class="d-block w-100" alt="...">
+            {% if panelcarousel.image %}
+              <img id="carousel-image-{{forloop.counter0}}-{{ panel_id }}" src="{{ panelcarousel.image.url }}" class="d-block w-100" alt="...">
+            {% endif %}
             <div class="carousel-caption d-none d-md-block">
               <h5>{% if panelcarousel.title is not None %}{{ panelcarousel.title }}{% endif %}</h5>
               <p>{% if panelcarousel.description is not None %}{{ panelcarousel.description }}{% endif %}</p>
@@ -78,11 +80,14 @@
        */
       {% for panelcarousel in objects.carousel %}
         const image{{forloop.counter0}} = document.getElementById("carousel-image-{{forloop.counter0}}-{{ panel_id }}")
-        console.log("onResizeSetImage", "{{ panelcarousel.image_mobile.url }}", image{{forloop.counter0}}, window.innerWidth  )
-        if (window.innerWidth < 800 && "{{ panelcarousel.image_mobile.url }}" !== "") {
-          image{{forloop.counter0}}.src = "{{ panelcarousel.image_mobile.url }}"
+        if (window.innerWidth < 800 && "{% if panelcarousel.image_mobile %}{{ panelcarousel.image_mobile.url }}{% endif %}" !== "") {
+          {% if panelcarousel.image_mobile %}
+            image{{forloop.counter0}}.src = "{{ panelcarousel.image_mobile.url }}"
+          {% endif %}
         } else {
-          image{{forloop.counter0}}.src = "{{ panelcarousel.image.url }}"
+          {% if panelcarousel.image %}
+            image{{forloop.counter0}}.src = "{{ panelcarousel.image.url }}"
+          {% endif %}
         }
       {% endfor %}
     }
