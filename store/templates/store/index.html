@@ -22,6 +22,8 @@
       {% include "base/product_panel.html" with objects=panel %}
     {% elif panel.type == 4 %} {# CAROUSEL_MULTIFRAME #}
       {% include "base/carousel_multiframe.html" with objects=panel %}
+    {% elif panel.type == 5 %} {# JUMBOTRON #}
+      {% include "base/jumbotron.html" with objects=panel %}
     {% endif %}
   {% endfor %}
 {% endblock %}

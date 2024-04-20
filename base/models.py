@@ -10,9 +10,9 @@ from django.contrib.auth.models import (
 
 
 LANGUAGES_LIST = (
-    ('ca-es', 'Català'),
+    ('ca', 'Català'),
     # ('en-us', 'English EEUU'),
-    ('es-es', 'Español')
+    ('es', 'Español')
 )
 
 
@@ -56,7 +56,7 @@ class MyUser(AbstractBaseUser):
         unique=True,
     )
     date_of_birth = models.DateField(null=True, blank=True)
-    language = models.CharField(_('language'), max_length=5, choices=LANGUAGES_LIST, default='ca-es')
+    language = models.CharField(_('language'), max_length=5, choices=LANGUAGES_LIST, default='ca')
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 

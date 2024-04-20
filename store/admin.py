@@ -35,6 +35,10 @@ class PanelProductsInline(admin.TabularInline):
     model = models.PanelProducts
     extra = 0
 
+class PanelJumbotronInline(admin.TabularInline):
+    model = models.PanelJumbotron
+    extra = 0
+
 # A D M I N
 
 @admin.register(models.Panel)
@@ -44,5 +48,6 @@ class PanelAdmin(admin.ModelAdmin):
     inlines = [
         PanelCarouselInline,
         PanelCategoriesInline,
-        PanelProductsInline
+        PanelProductsInline,
+        PanelJumbotronInline
     ]

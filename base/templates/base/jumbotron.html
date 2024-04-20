@@ -1,0 +1,23 @@
+<div class="row align-items-md-stretch d-flex">
+{% for obj in objects.jumbotron %}
+  {% if objects.jumbotron|length == 2 %}
+  <div class="col-md-6 d-flex flex-column">
+  {% elif objects.jumbotron|length == 3 %}
+  <div class="col-md-4 d-flex flex-column">
+  {% elif objects.jumbotron|length == 4 %}
+  <div class="col-md-3 d-flex flex-column">
+  {% else %}
+  <div class="col-md-12">
+  {% endif %}
+      <div class="p-5 mb-4 bg-body-tertiary rounded-3 flex-grow-1 d-flex flex-column">
+      <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">{{ obj.title }}</h1>
+        <p class="col-md-8 fs-4">{{ obj.description }}</p>
+        {% if obj.link %}
+          <a href="{{ obj.link }}" class="btn btn-primary btn-lg" type="button">Visitar</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</div>

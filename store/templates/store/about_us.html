@@ -2,6 +2,16 @@
 
 {% block title %} {{ config.name }} {% endblock %}
 
+{% block style %} 
+{{ block.super }}
+<style>
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+{% endblock %}
+
 {% block logo %}{{ config.logo_url }}{% endblock %}
 
 {% block navbar_title%} {{ config.name }} {% endblock %}
@@ -23,7 +33,7 @@
     <p>{{ config.about_us | safe }}</p>  
     <br/><br/>
     
-    <h3>{% if request.LANGUAGE_CODE == 'ca' %}La nostra adreça{% else %}La nostra direcció{% endif %}</h3>
+    <h3>{% if request.LANGUAGE_CODE == 'ca' %}La nostra adreça{% else %}Nuestra dirección{% endif %}</h3>
     <p>{{ config.address | safe }}</p>
     <br/><br/>
 

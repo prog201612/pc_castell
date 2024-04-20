@@ -14,7 +14,7 @@
   <h3>{{ category.name }}</h3>
   <br />
 
-  <div style="display:flex; flex-wrap: wrap;">
+  <div style="display:flex; flex-wrap: wrap; justify-content: center">
     {% for product in category.products %}
     <div class="card" style="width: 18rem; margin: 3px;">
       {% if product.id and product.image %}

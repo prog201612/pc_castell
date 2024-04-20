@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 from store.models import Panel, Translate, ProductCategory, Product, Config
 
 def translate_text(language, text):
-    if language == 'ca':
+    if language.startswith('ca'):
         return text
     translated_text = Translate.objects.filter(ca=text)
     if len(translated_text) == 0:
@@ -81,6 +81,16 @@ def translate_panels(language):
             panel_dic["products"].append(product)
         panel_dic["products_panel_width"] = len(panel_dic["products"]) * 300
         panels.append(panel_dic)
+
+        # J u m b o t r o n   d e l   p a n e l l
+        panel_dic["jumbotron"] = []
+        for jumbotron_row in panel.paneljumbotron_set.all():
+            jumbotron = {
+                "title": translate_text(language, jumbotron_row.title),
+                "description": translate_text(language, jumbotron_row.description),
+                "link": jumbotron_row.link,
+            }
+            panel_dic["jumbotron"].append(jumbotron)
 
     return panels
 

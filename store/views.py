@@ -11,11 +11,13 @@ class Index(TemplateView):
     template_name = "store/index.html"
 
     def get_context_data(self, **kwargs):
+        # Recuperem la cookie de l'idioma
+        language = self.request.COOKIES.get('language', self.request.LANGUAGE_CODE)
         context = super().get_context_data(**kwargs)
         if Config.objects.count() > 0:
             context['config'] = Config.objects.all()[0]
         if Panel.objects.count() > 0:
-            context['panels'] = translate_panels(self.request.LANGUAGE_CODE)
+            context['panels'] = translate_panels(language)
         return context
 
 # P r o d u c t s   B y   C l a s s
@@ -31,7 +33,8 @@ class ProductsByClass(TemplateView):
         if Config.objects.count() > 0:
             context['config'] = Config.objects.all()[0]
         if Panel.objects.count() > 0:
-            context['category'] = translate_products_by_category(self.request.LANGUAGE_CODE, category_id)
+            language = self.request.COOKIES.get('language', self.request.LANGUAGE_CODE)
+            context['category'] = translate_products_by_category(language, category_id)
         return context
 
 
@@ -43,7 +46,8 @@ class AboutUs(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['config'] = translate_config(self.request.LANGUAGE_CODE)
+        language = self.request.COOKIES.get('language', self.request.LANGUAGE_CODE)
+        context['config'] = translate_config(language)
         return context
 
 
@@ -55,5 +59,6 @@ class Product(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['product'] = translate_product(self.request.LANGUAGE_CODE, kwargs['product_id'])
+        language = self.request.COOKIES.get('language', self.request.LANGUAGE_CODE)
+        context['product'] = translate_product(language, kwargs['product_id'])
         return context

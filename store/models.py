@@ -24,8 +24,8 @@ class Config(models.Model):
 
 
 class Translate(models.Model):
-    ca = models.CharField("Català", max_length=250)
-    es = models.CharField("Castellano", max_length=250)
+    ca = models.TextField("Català")
+    es = models.TextField("Castellano")
 
     def __str__(self) -> str:
         return self.ca
@@ -69,11 +69,13 @@ CAROUSEL_CHOICE = 1
 PRODUCT_CATEGORY_CHOICE = 2
 PRODUCT_CHOICE = 3
 CAROUSEL_MULTIFRAME = 4
+JUMBOTRON = 5
 PANEL_CHOICES = (
     (CAROUSEL_CHOICE, "CAROUSEL"),
     (PRODUCT_CATEGORY_CHOICE, "PRODUCT CATEGORY"),
     (PRODUCT_CHOICE, "PRODUCT"),
     (CAROUSEL_MULTIFRAME, "CAROUSEL DE PRODUCTES"),
+    (JUMBOTRON, "JUMBOTRON"),
 )
 
 class Panel(models.Model):
@@ -109,5 +111,9 @@ class PanelProducts(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
 
-
+class PanelJumbotron(models.Model):
+    panel = models.ForeignKey(Panel, on_delete=models.CASCADE)
+    title = models.CharField("Títol", max_length=50, blank=True, null=True)
+    description = models.CharField("Descripció", max_length=250, blank=True, null=True)
+    link = models.URLField("Enllaç", blank=True, null=True)
 
