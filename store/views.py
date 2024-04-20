@@ -47,7 +47,9 @@ class AboutUs(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         language = self.request.COOKIES.get('language', self.request.LANGUAGE_CODE)
+        print("language:", language)
         context['config'] = translate_config(language)
+        context['language'] = language
         return context
 
 
