@@ -26,11 +26,8 @@
           <li class="nav-item">
             <a class="nav-link {% if request.path == '/' %}active{% endif %}" aria-current="page" href="/">Home</a>
           </li>
-          <!--<li class="nav-item">
-            <a class="nav-link" href="#">{% if request.LANGUAGE_CODE == 'ca' %}Categories{% else %}Categorias{% endif %}</a>
-          </li>-->
           <li class="nav-item">
-            <a class="nav-link {% if request.path == '/aboutus/' %}active{% endif %}" href="/aboutus" id="a-qui-som">{% if request.LANGUAGE_CODE == 'ca' %}Qui som{% else %}Quienes somos{% endif %}</a>
+            <a class="nav-link {% if request.path == '/aboutus/' %}active{% endif %}" href="/aboutus/" id="a-qui-som">{% if language == 'ca' %}Qui som{% else %}Quienes somos{% endif %}</a>
           </li>
         </ul>
 
@@ -38,7 +35,7 @@
         <ul class="navbar-nav">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="a-lang" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              CA
+              {{ language }}
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#" onClick="setLanguage('ca')">Català</a></li>
@@ -66,7 +63,7 @@
 {% block foot %} 
   <h3 class="text-center p-2 pt-3 fw-lighter">{{ config.name }}</h3>
   <h3 class="text-center p-1"><i class="fa-brands fa-square-facebook"></i></h3>
-  <p class="text-center p-1 pb-4 fw-lighter">© 2024, Lang: {{ request.LANGUAGE_CODE }}</p>
+  <p class="text-center p-1 pb-4 fw-lighter">© 2025</p>
 {% endblock %}
 
 

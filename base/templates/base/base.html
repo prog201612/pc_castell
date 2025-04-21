@@ -93,7 +93,7 @@
     crossorigin="anonymous"></script>
   <script>
     function setLanguage(lang) {
-      document.cookie = "language=" + lang + "; path=/"
+      document.cookie = "language=" + lang.toLowerCase() + "; path=/"
       location.reload()
     }
   
@@ -101,7 +101,7 @@
       let lang = document.cookie.split('; ').find(row => row.startsWith('language='));
       if (lang) {
         lang = lang.split('=')[1]
-        document.getElementById('a-lang').innerText = lang.substring(0, 2).toUpperCase();
+        document.getElementById('a-lang').innerText = lang.substring(0, 2).toLowerCase();
         let quiSom = document.getElementById('a-qui-som');
         if (quiSom) {
           if (lang == 'ca') {
