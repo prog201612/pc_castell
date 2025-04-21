@@ -4,6 +4,9 @@
   <br />
 
   <div class="product-panel-div">
+    {% if objects.image %}
+      <img src="{{ objects.image.url }}" class="card-img-top" alt="...">
+    {% endif %}
     {% for panelproducts in objects.products %}
     <div class="card card-product">
 

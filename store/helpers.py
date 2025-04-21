@@ -43,7 +43,7 @@ def translate_products_by_category(language, category_id):
 
 def translate_panels(language):
     panels = []
-    for panel in Panel.objects.all():
+    for panel in Panel.objects.filter(show=True).order_by('order'):
         # P a n e l l
         panel_dic = {
             "name": translate_text(language, panel.name),
@@ -99,6 +99,7 @@ def translate_config(language):
     config = None
     if Config.objects.count() > 0:
         config = Config.objects.all()[0]
+    print("config.logo:", config.logo == '' )
     return {
         "name": "" if config is None else config.name,
         "address": "" if config is None else config.address,
@@ -106,7 +107,7 @@ def translate_config(language):
         "about_us": "" if config is None else translate_text(language, config.about_us),
         "address_title": translate_text(language, "La nostra adreça"),
         "contact_title": translate_text(language, "Contacte amb nosaltres"),
-        "logo_url": "" if config is None else config.logo.url,
+        "logo_url": "" if config is None or config.logo == '' else config.logo.url,
         "phone": "" if config is None else config.phone,
         "email": "" if config is None else config.email
     }

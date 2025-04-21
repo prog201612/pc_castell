@@ -82,10 +82,11 @@ class Panel(models.Model):
     """
     Els diferents panells amb informació que poden anar al index.html
     """
-    name = models.CharField("Nom del panell", max_length=50, blank=True, null=True)
+    name = models.CharField("Nom del panell", max_length=50) # , blank=True, null=True
     order = models.IntegerField("Ordre", default=0)
     type = models.IntegerField("Tipus de panell", choices=PANEL_CHOICES, default=CAROUSEL_CHOICE)
     autoplay = models.BooleanField("Autoplay (Només per Carousels)", default=True)
+    show = models.BooleanField("Mostrar", default=True)
 
     def __str__(self) -> str:
         return self.name

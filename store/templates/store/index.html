@@ -2,7 +2,7 @@
 
 {% block title %} {{ config.name }} {% endblock %}
 
-{% block logo %}{{ config.logo.url }}{% endblock %}
+{% block logo %}{% if config.logo %}{{ config.logo.url }}{% endif %}{% endblock %}
 
 {% block navbar_title%} {{ config.name }} {% endblock %}
 

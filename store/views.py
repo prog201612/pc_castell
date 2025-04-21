@@ -35,7 +35,7 @@ class Index(TemplateView):
         if Config.objects.count() > 0:
             context['config'] = Config.objects.all()[0]
 
-        if Panel.objects.count() > 0:
+        if Panel.objects.filter(show=True).count() > 0:
             context['panels'] = translate_panels(language)
 
         return context
@@ -84,5 +84,6 @@ class Product(TemplateView):
         context = super().get_context_data(**kwargs)
         language = get_language(self.request)
         context['language'] = language
+        context['config'] = translate_config(language)
         context['product'] = translate_product(language, kwargs['product_id'])
         return context
